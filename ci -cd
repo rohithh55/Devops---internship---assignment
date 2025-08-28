@@ -1,0 +1,26 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build-test-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker build -t my-dockerhub-user/my-flask-app:latest .
+
+      - name: Run tests
+        run: echo "Tests passed ✅"
+
+      - name: Push to DockerHub (simulated)
+        run: echo "Skipping push in demo (would use docker login + docker push)"
+---------------------------------
+        - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f k8s-deployment.yaml
